@@ -27,8 +27,16 @@
     "release",
     "comparison"
   ],
-  "author": "",
+  "author": "Chandrakanth Sawant <chandrakanth.sawant@gmail.com>",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/csawantgit/commvault-release-comparison-mcp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/csawantgit/commvault-release-comparison-mcp/issues"
+  },
+  "homepage": "https://github.com/csawantgit/commvault-release-comparison-mcp#readme",
   "engines": {
     "node": ">=18.0.0"
   },
