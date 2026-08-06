@@ -1,0 +1,115 @@
+{
+  "version": "11.44",
+  "url": "https://documentation.commvault.com/11.44/software/changes_in_long_term_support_release_11_44.html",
+  "analysisTime": "2026-08-06T10:52:41.461Z",
+  "cssSelectors": {
+    "mainContent": "article",
+    "sectionHeading": "h2",
+    "features": "ul > li"
+  },
+  "sections": [
+    {
+      "heading": "Backup and Restore Agents",
+      "rawHTMLSnippet": "<h2 id=\"backup-and-restore-agents\">Backup and Restore Agents</h2>\n<table>\n<thead>\n<tr>\n<th>Introduced in</th>\n<th>Product</th>\n<th>Change</th>\n<th>Learn more</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>11.42</td>\n<td>Exchange Mailbox Backup Quota for End Users</td>\n<td>You can no longer manage backup quota for Exchange Mailbox in the CommCell Console. You can continue using the existing configurations but no further support or enhancements will be provided.</td>\n<td><a class=\"link-doc\" data-doc-src=\"co",
+      "extractedItems": [
+        {
+          "raw": "<a class=\"link-doc\" data-doc-src=\"commvault_essential/file_servers/nutanix_files/complete_file_server_guided_setup_for_nutanix_files_exported_to_cifs\" href=\"complete_file_server_guided_setup_for_nutanix_files_exported_to_cifs.html\">Complete the File Server Guided Setup for Nutanix Files Exported to ",
+          "cleaned": "Complete the File Server Guided Setup for Nutanix Files Exported to CIFS",
+          "problems": []
+        },
+        {
+          "raw": "<a class=\"link-doc\" data-doc-src=\"commvault_essential/file_servers/qumulo_file_storage/complete_the_file_server_guided_setup_for_qumulo_files_exported_to_cifs\" href=\"complete_file_server_guided_setup_for_qumulo_files_exported_to_cifs.html\">Complete the File Server Guided Setup for Qumulo Files Expor",
+          "cleaned": "Complete the File Server Guided Setup for Qumulo Files Exported to CIFS",
+          "problems": []
+        }
+      ],
+      "extractionNotes": "Only 2 item(s) extracted - may be incomplete"
+    },
+    {
+      "heading": "CommCell Management",
+      "rawHTMLSnippet": "<h2 id=\"commcell-management\">CommCell Management</h2>\n<table>\n<thead>\n<tr>\n<th>Introduced in</th>\n<th>Product</th>\n<th>Change</th>\n<th>Learn more</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>11.42</td>\n<td>User groups</td>\n<td>Tenant administrators can now include navigation items for a user group.</td>\n<td><a class=\"link-doc\" data-doc-src=\"commvault_essential/common_configurations/customization/customizing_navigation_menu_for_user_group\" href=\"customizing_navigation_menu_for_user_group.html\">Customizin",
+      "extractedItems": [
+        {
+          "raw": "When you convert or promote an Air Gap Protect Infrequent Access copy to a primary copy, all other copies associated with the storage policy are automatically disabled. Once disabled, you cannot re-enable these copies.",
+          "cleaned": "When you convert or promote an Air Gap Protect Infrequent Access copy to a primary copy, all other copies associated with the storage policy are automatically disabled. Once disabled, you cannot re-en",
+          "problems": []
+        },
+        {
+          "raw": "During plan creation, Serverless Log Backups are enabled by default for newly created plans.",
+          "cleaned": "During plan creation, Serverless Log Backups are enabled by default for newly created plans.",
+          "problems": []
+        },
+        {
+          "raw": "<a class=\"link-doc\" data-doc-src=\"commvault_essential/common_configurations/storage_policies/promoting_secondary_copy_as_primary_copy\" href=\"promoting_secondary_copy_to_primary_copy.html\">Promoting a Secondary Copy to Primary Copy</a>",
+          "cleaned": "Promoting a Secondary Copy to Primary Copy",
+          "problems": []
+        },
+        {
+          "raw": "<a class=\"link-doc\" data-doc-src=\"commvault_essential/databases/disk_caching_for_frequent_log_backups\" href=\"serverless_log_backups.html\">Serverless Log Backups</a>",
+          "cleaned": "Serverless Log Backups",
+          "problems": []
+        }
+      ],
+      "extractionNotes": "Successfully extracted 4 items"
+    },
+    {
+      "heading": "Commvault Store",
+      "rawHTMLSnippet": "<h2 id=\"commvault-store\">Commvault Store</h2>\n<table>\n<thead>\n<tr>\n<th>Introduced in</th>\n<th>Product</th>\n<th>Change</th>\n<th>Learn more</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>11.42</td>\n<td>Commvault Store</td>\n<td>The Commvault Store has a refreshed design and now requires a log-in to view the store. All existing functionality remains unchanged.</td>\n<td><a href=\"https://cloud.commvault.com/commandcenter/#/softwareStore\">Commvault Store</a></td>\n</tr>\n</tbody>\n</table>\n",
+      "extractedItems": [],
+      "extractionNotes": "No list items found - section may be empty or use different structure"
+    },
+    {
+      "heading": "Databases",
+      "rawHTMLSnippet": "<h2 id=\"databases\">Databases</h2>\n<table class=\"table table-bordered\">\n<tr>\n<th>\n<p>Introduced in</p>\n</th>\n<th>\n<p>Product</p>\n</th>\n<th>\n<p>Change</p>\n</th>\n<th>\n<p>Learn more</p>\n</th>\n</tr>\n<tr>\n<td>\n<p>11.42</p>\n</td>\n<td>\n<p>Amazon DocumentDB, Amazon RDS, Amazon Redshift</p>\n</td>\n<td>\n<p>Commvault now adds the <code>commvault:createdBy</code> and <code>commvault:vendor</code> tags to resources created during backup and restore operations.</p>\n</td>\n<td>\n<ul>\n<li>\n<p><a class=\"link-doc\" da",
+      "extractedItems": [
+        {
+          "raw": "\n<p><a class=\"link-doc\" data-doc-src=\"commvault_essential/databases/clouddb/amazon_documentdb/planning_documentdb/aws_resource_tags_created_by_commvault_for_amazon_documentdb\" href=\"support_and_usage_of_aws_resource_tags_for_amazon_documentdb_protection.html\">Support and Usage of AWS Resource Tags f",
+          "cleaned": "Support and Usage of AWS Resource Tags for Amazon DocumentDB Protection",
+          "problems": []
+        },
+        {
+          "raw": "\n<p><a class=\"link-doc\" data-doc-src=\"commvault_essential/databases/clouddb/amazon_rds/common_support_and_requirements_for_rds/aws_resource_tags_created_by_commvault_for_amazon_rds\" href=\"support_and_usage_of_aws_resource_tags_for_amazon_rds_protection.html\">Support and Usage of AWS Resource Tags fo",
+          "cleaned": "Support and Usage of AWS Resource Tags for Amazon RDS Protection",
+          "problems": []
+        },
+        {
+          "raw": "\n<p><a class=\"link-doc\" data-doc-src=\"commvault_essential/databases/clouddb/amazon_redshift/planning_redshift/aws_resource_tags_created_by_commvault_for_amazon_redshift\" href=\"support_and_usage_of_aws_resource_tags_for_amazon_redshift_protection.html\">Support and Usage of AWS Resource Tags for Amazo",
+          "cleaned": "Support and Usage of AWS Resource Tags for Amazon Redshift Protection",
+          "problems": []
+        }
+      ],
+      "extractionNotes": "Successfully extracted 3 items"
+    },
+    {
+      "heading": "Install and Deployment",
+      "rawHTMLSnippet": "<h2 id=\"install-and-deployment\">Install and Deployment</h2>\n<table>\n<thead>\n<tr>\n<th>Introduced in</th>\n<th>Product</th>\n<th>Change</th>\n<th>Learn more</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>11.42</td>\n<td>Upgrades</td>\n<td>When you upgrade the CommServe computer to the latest platform release, a pre-upgrade check will be performed to verify that the CommServe DB (data) size is not greater than 400 GB. If the CommServe DB (data) size exceeds this limit, the upgrade will be blocked. For assistance ",
+      "extractedItems": [
+        {
+          "raw": "<a class=\"link-doc\" data-doc-src=\"commvault_essential/common_configurations/servers/adding_additional_server_01\" href=\"adding_additional_server_01.html\">Adding an Additional Server</a>",
+          "cleaned": "Adding an Additional Server",
+          "problems": []
+        },
+        {
+          "raw": "<a class=\"link-doc\" data-doc-src=\"commvault_essential/common_configurations/servers/adding_additional_server_for_file_system\" href=\"adding_additional_server_for_file_system.html\">Adding an Additional Server for File System</a>",
+          "cleaned": "Adding an Additional Server for File System",
+          "problems": []
+        }
+      ],
+      "extractionNotes": "Only 2 item(s) extracted - may be incomplete"
+    },
+    {
+      "heading": "Kubernetes",
+      "rawHTMLSnippet": "<h2 id=\"kubernetes\">Kubernetes</h2>\n<table>\n<thead>\n<tr>\n<th>Introduced in</th>\n<th>Product</th>\n<th>Change</th>\n<th>Learn more</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>11.42.40</td>\n<td>Kubernetes</td>\n<td>For new clusters, the Commvault software backs up PVCs directly to the storage. To disable the feature, you can use the <strong>Network Optimized Backups</strong> toggle key on the cluster and application group configuration pages.</td>\n<td><a class=\"link-doc\" data-doc-src=\"commvault_essential/ku",
+      "extractedItems": [],
+      "extractionNotes": "No list items found - section may be empty or use different structure"
+    }
+  ],
+  "overallProblems": [
+    "Empty sections found"
+  ],
+  "parserRecommendations": [
+    "✓ Main structure identified: 6 H2 sections",
+    "❌ 1 overall problems detected",
+    "📊 Total items extracted: 11 from 6 sections"
+  ]
+}

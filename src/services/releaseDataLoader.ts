@@ -9,6 +9,7 @@ export class ReleaseDataLoader {
   private dataSources: Map<string, DataSource>;
   private cache: CacheManager;
   private loadingPromises: Map<string, Promise<ReleaseData>> = new Map();
+  private sourceUsed: Map<string, string> = new Map(); // Track which source loaded each version
 
   constructor(dataSources: DataSource[], cacheTTLMinutes: number = 60) {
     this.dataSources = new Map(dataSources.map((ds) => [ds.name, ds]));
@@ -56,6 +57,7 @@ export class ReleaseDataLoader {
         console.error(`[Loading] ${version} from ${sourceName}...`);
         const data = await dataSource.fetch(version);
         this.cache.set(cacheKey, data);
+        this.sourceUsed.set(version, sourceName); // Track which source was used
         console.error(
           `[Loaded] ${version} from ${sourceName} (${Object.keys(data.categories).length} categories)`
         );
@@ -100,6 +102,24 @@ export class ReleaseDataLoader {
    */
   getDataSources(): string[] {
     return Array.from(this.dataSources.keys());
+  }
+
+  /**
+   * Get the source used for a version
+   */
+  getSourceUsed(version: string): string {
+    return this.sourceUsed.get(version) || "Unknown";
+  }
+
+  /**
+   * Get all source usage info
+   */
+  getSourceUsageInfo(): Record<string, string> {
+    const result: Record<string, string> = {};
+    for (const [version, source] of this.sourceUsed) {
+      result[version] = source;
+    }
+    return result;
   }
 
   /**

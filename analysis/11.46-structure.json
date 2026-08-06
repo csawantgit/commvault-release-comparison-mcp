@@ -1,0 +1,42 @@
+{
+  "version": "11.46",
+  "url": "https://documentation.commvault.com/11.46/software/changes_in_innovation_release_11_46.html",
+  "analysisTime": "2026-08-06T10:51:48.190Z",
+  "structure": {
+    "mainContentSelectors": [
+      "main",
+      "article",
+      "div#content",
+      "div.content"
+    ],
+    "headings": [
+      {
+        "text": "Changes in Innovation Release 11.46",
+        "level": "H1",
+        "position": 16569
+      },
+      {
+        "text": "CommCell Management",
+        "level": "H2",
+        "position": 16738
+      },
+      {
+        "text": "Page contents",
+        "level": "H4",
+        "position": 17788
+      }
+    ],
+    "navigationElements": [],
+    "lists": [],
+    "contentSections": [
+      {
+        "heading": "CommCell Management",
+        "contentPreview": "(empty section)",
+        "structureType": "unknown"
+      }
+    ]
+  },
+  "recommendations": [
+    "✓ Main content container identified (reduces noise by 95%)"
+  ]
+}

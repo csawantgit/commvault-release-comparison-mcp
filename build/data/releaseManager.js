@@ -1,4 +1,5 @@
 import { ReleaseDataLoader } from "../services/releaseDataLoader.js";
+import { CategorizedDataSource } from "../services/categorizedDataSource.js";
 import { LiveDocumentationSource } from "../services/liveDocumentationSource.js";
 import { CommvaultDocSource } from "../services/commvaultDocSource.js";
 import { MockDataSource } from "../services/mockDataSource.js";
@@ -12,7 +13,8 @@ export class ReleaseManager {
         this.initialized = false;
         // Create data sources in order of preference
         const dataSources = [
-            new LiveDocumentationSource(), // Try live documentation first
+            new CategorizedDataSource(), // Primary: Pre-categorized data from JSON
+            new LiveDocumentationSource(), // Try live documentation
             new CommvaultDocSource({
                 versions: ["11.44", "11.46", "12.0", "14.0", "15.0"],
             }),
@@ -109,6 +111,18 @@ export class ReleaseManager {
         this.loader.clearCache();
     }
     /**
+     * Get the data source used for a version
+     */
+    getDataSourceUsed(version) {
+        return this.loader.getSourceUsed(version);
+    }
+    /**
+     * Get all data source usage info
+     */
+    getDataSourceInfo() {
+        return this.loader.getSourceUsageInfo();
+    }
+    /**
      * Get diagnostic information
      */
     getDiagnostics() {
@@ -118,6 +132,7 @@ export class ReleaseManager {
             cacheSize: this.releases.size,
             dataSources: this.loader.getDataSources(),
             cacheStats: this.loader.getCacheStats(),
+            dataSourceUsage: this.getDataSourceInfo(),
         };
     }
 }

@@ -1,0 +1,241 @@
+{
+  "version": "11.44",
+  "url": "https://documentation.commvault.com/11.44/software/changes_in_long_term_support_release_11_44.html",
+  "analysisTime": "2026-08-06T10:51:47.117Z",
+  "structure": {
+    "mainContentSelectors": [
+      "main",
+      "article",
+      "div#content",
+      "div.content"
+    ],
+    "headings": [
+      {
+        "text": "Changes in Long-Term Support Release 11.44",
+        "level": "H1",
+        "position": 16629
+      },
+      {
+        "text": "Backup and Restore Agents",
+        "level": "H2",
+        "position": 16805
+      },
+      {
+        "text": "CommCell Management",
+        "level": "H2",
+        "position": 22464
+      },
+      {
+        "text": "Commvault Store",
+        "level": "H2",
+        "position": 26282
+      },
+      {
+        "text": "Databases",
+        "level": "H2",
+        "position": 26757
+      },
+      {
+        "text": "Install and Deployment",
+        "level": "H2",
+        "position": 28286
+      },
+      {
+        "text": "Kubernetes",
+        "level": "H2",
+        "position": 30314
+      },
+      {
+        "text": "Reports",
+        "level": "H2",
+        "position": 31025
+      },
+      {
+        "text": "Security",
+        "level": "H2",
+        "position": 33024
+      },
+      {
+        "text": "SQL Server",
+        "level": "H2",
+        "position": 37277
+      }
+    ],
+    "navigationElements": [],
+    "lists": [
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Complete the File Server Guided Setup for Nutanix Files Exported to CIFSComplete the File Server Gui"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "When you convert or promote an Air Gap Protect Infrequent Access copy to a primary copy, all other c"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Promoting a Secondary Copy to Primary CopyServerless Log Backups"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Support and Usage of AWS Resource Tags for Amazon DocumentDB Protection\n\n\nSupport and Usage of AWS R"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Adding an Additional ServerAdding an Additional Server for File System"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Azure Key Vault\nBeyondTrust\nDelinea"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Adding an Azure Key Vault\nAdding a BeyondTrust Credential Vault\nAdding a Delinea Credintial Vault"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Operation-specific exclusions: Most MPA operations support dedicated exclusion lists for users and u"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "On the Configuration page (Storage and Copy Levels):\n\nThe WORM tile has been renamed to Immutability"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Immutability: Displays whether Compliance lock is enabled or disabled  for the corresponding cloud s"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Configuring WORM Storage Mode on Disk Libraries\nConfiguring Storage Lock\nConfiguring WORM Storage Mo"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Auxiliary copy\n\n\nSpace reclamation\n\n\nData verification"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Scheduling Auxiliary Copy Operation for a Storage Policy\n\n\nCreating a Schedule Policy for Auxiliary "
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Air Gap Protect Azure Archive\nAir Gap Protect AWS Archive\nAir Gap Protect Google Archive\nAir Gap Pro"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Create Air Gap Protect storage\n\n\nArchive Storage Tier"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Azure Blob Storage\nAzure Blob Storage in Air Gap Protect"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "If you use the older Hot GRS license, you will see Frequent Access (Multi-Region).\nIf you use the ne"
+        ]
+      },
+      {
+        "type": "UL",
+        "itemCount": 1,
+        "sampleItems": [
+          "Protect VMware vSphere VMs\n\n\nVMware Cloud Director"
+        ]
+      }
+    ],
+    "contentSections": [
+      {
+        "heading": "Backup and Restore Agents",
+        "contentPreview": "Complete the File Server Guided Setup for Nutanix Files Exported to CIFSComplete the File Server Guided Setup for Qumulo Files Exported to CIFS",
+        "structureType": "list-based"
+      },
+      {
+        "heading": "CommCell Management",
+        "contentPreview": "When you convert or promote an Air Gap Protect Infrequent Access copy to a primary copy, all other copies associated with the storage policy are autom",
+        "structureType": "list-based"
+      },
+      {
+        "heading": "Commvault Store",
+        "contentPreview": "(empty section)",
+        "structureType": "unknown"
+      },
+      {
+        "heading": "Databases",
+        "contentPreview": "Support and Usage of AWS Resource Tags for Amazon DocumentDB Protection\n\n\nSupport and Usage of AWS Resource Tags for Amazon RDS Protection\n\n\nSupport a",
+        "structureType": "list-based"
+      },
+      {
+        "heading": "Install and Deployment",
+        "contentPreview": "Adding an Additional ServerAdding an Additional Server for File System",
+        "structureType": "list-based"
+      },
+      {
+        "heading": "Kubernetes",
+        "contentPreview": "(empty section)",
+        "structureType": "formatted-text"
+      },
+      {
+        "heading": "Reports",
+        "contentPreview": "(empty section)",
+        "structureType": "formatted-text"
+      },
+      {
+        "heading": "Security",
+        "contentPreview": "Azure Key Vault\nBeyondTrust\nDelinea\n\n\n\n\nAdding an Azure Key Vault\nAdding a BeyondTrust Credential Vault\nAdding a Delinea Credintial Vault\n\n\n\n\n\n11.42\n\n",
+        "structureType": "list-based"
+      }
+    ]
+  },
+  "recommendations": [
+    "✓ UL lists detected - use <ul><li> selector for feature extraction",
+    "✓ Majority of sections are list-based (7/11) - focus on list extraction",
+    "⚠ Could not isolate main content - full HTML being parsed"
+  ]
+}

@@ -1,0 +1,26 @@
+{
+  "version": "11.46",
+  "releaseDate": "2023-08-20",
+  "dataSource": "Live Commvault Documentation",
+  "categories": {
+    "Virtualization": [],
+    "Security": [],
+    "Database": [],
+    "Storage": [],
+    "Platform": [
+      {
+        "id": "11.46-platform-1",
+        "title": "CommCell Management",
+        "description": "CommCell Management",
+        "source_heading": "CommCell Management"
+      }
+    ],
+    "Performance": []
+  },
+  "metadata": {
+    "fetchedAt": "2026-08-06T10:40:59.884Z",
+    "pageTitle": "Changes in Innovation Release 11.46",
+    "totalChanges": 1,
+    "extractionNotes": "Extracted from live documentation using heading-based parsing"
+  }
+}

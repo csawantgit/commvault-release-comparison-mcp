@@ -1,0 +1,887 @@
+{
+  "version": "11.44",
+  "categorized_at": "2026-08-06T11:08:59.074Z",
+  "mapping_rules": {
+    "Platform": [
+      "Backup and Restore Agents",
+      "CommCell Management",
+      "Commvault Store",
+      "Install and Deployment",
+      "Reports"
+    ],
+    "Virtualization": [
+      "Virtualization",
+      "Kubernetes"
+    ],
+    "Security": [
+      "Security"
+    ],
+    "Database": [
+      "Databases",
+      "SQL Server"
+    ],
+    "Storage": [
+      "Storage"
+    ]
+  },
+  "categories": {
+    "Virtualization": [
+      {
+        "id": "11.44-virtualization-46",
+        "section": "Virtualization",
+        "introduced_in": "11.42",
+        "product": "Amazon EC2",
+        "change": "Commvault now adds the commvault:createdBy and commvault:vendor tags to resources created during backup and restore operations for Amazon EC2 instances.",
+        "learn_more_links": [
+          {
+            "text": "Support and usage of AWS resource tags for Amazon EC2 protection",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>Commvault now adds the <code>commvault:createdBy</code> and <code>commvault:vendor</code> tags to resources created during backup and restore operations for Amazon EC2 instances.</p>\n",
+        "quality_score": 100,
+        "category": "Virtualization",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-virtualization-47",
+        "section": "Virtualization",
+        "introduced_in": "11.42.29",
+        "product": "Proxmox",
+        "change": "For Proxmox VE 9.0, Commvault supports native snapshots for thick LVM storage when the VM disk format is QCOW2.",
+        "learn_more_links": [
+          {
+            "text": "Backups for Proxmox VMs",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>For Proxmox VE 9.0, Commvault supports native snapshots for thick LVM storage when the VM disk format is QCOW2.</p>\n",
+        "quality_score": 100,
+        "category": "Virtualization",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-virtualization-48",
+        "section": "Virtualization",
+        "introduced_in": "11.42.40",
+        "product": "VMware and VMware Cloud Director",
+        "change": "You can use built-in and CyberArk vault credentials to authenticate to the guest OS during guest file restores for VMware and VMware Cloud Director.",
+        "learn_more_links": [
+          {
+            "text": "Protect VMware vSphere VMs",
+            "href": ""
+          },
+          {
+            "text": "VMware Cloud Director",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>You can use built-in and CyberArk vault credentials to authenticate to the guest OS during guest file restores for VMware and VMware Cloud Director.</p>\n",
+        "quality_score": 100,
+        "category": "Virtualization",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-kubernetes-22",
+        "section": "Kubernetes",
+        "introduced_in": "11.42.40",
+        "product": "Kubernetes",
+        "change": "For new clusters, the Commvault software backs up PVCs directly to the storage. To disable the feature, you can use the Network Optimized Backups toggle key on the cluster and application group configuration pages.",
+        "learn_more_links": [
+          {
+            "text": "Network-optimized backups and restores for Kubernetes",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "For new clusters, the Commvault software backs up PVCs directly to the storage. To disable the feature, you can use the <strong>Network Optimized Backups</strong> toggle key on the cluster and applica",
+        "quality_score": 100,
+        "category": "Virtualization",
+        "mapping_confidence": 95
+      }
+    ],
+    "Security": [
+      {
+        "id": "11.44-security-27",
+        "section": "Security",
+        "introduced_in": "11.42",
+        "product": "Threat Scan",
+        "change": "Threat Scan is a Commvault unified solution that integrates anomaly detection, threat scanning, and response actions to safeguard your backup data.",
+        "learn_more_links": [
+          {
+            "text": "Threat Scan",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>Threat Scan is a Commvault unified solution that integrates anomaly detection, threat scanning, and response actions to safeguard your backup data. </p>\n",
+        "quality_score": 100,
+        "category": "Security",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-security-28",
+        "section": "Security",
+        "introduced_in": "11.42",
+        "product": "CommCell Management",
+        "change": "The Commvault built-in Key Management Server (KMS) now generates a unique key for each CommCell, replacing the previously hardcoded built-in key. Keys are stored securely outside the CommServe database with machine-level protection, offering security comparable to an external KMS. It is safeguarded ",
+        "learn_more_links": [],
+        "raw_change_html": "\n<p>The Commvault built-in Key Management Server (KMS) now generates a unique key for each CommCell, replacing the previously hardcoded built-in key. Keys are stored securely outside the CommServe dat",
+        "quality_score": 100,
+        "category": "Security",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-security-29",
+        "section": "Security",
+        "introduced_in": "11.42",
+        "product": "Users",
+        "change": "Commvault supports the following third-party credential vault platforms: Azure Key Vault BeyondTrust Delinea",
+        "learn_more_links": [
+          {
+            "text": "Adding an Azure Key Vault",
+            "href": ""
+          },
+          {
+            "text": "Adding a BeyondTrust Credential Vault",
+            "href": ""
+          },
+          {
+            "text": "Adding a Delinea Credintial Vault",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>Commvault supports the following third-party credential vault platforms:</p>\n<ul>\n<li>Azure Key Vault</li>\n<li>BeyondTrust</li>\n<li>Delinea</li>\n</ul>\n",
+        "quality_score": 100,
+        "category": "Security",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-security-30",
+        "section": "Security",
+        "introduced_in": "11.42",
+        "product": "Multi-Factor Authentication",
+        "change": "Critical operations such as password updates, email address changes, and disabling two-factor authentication require the logged-in user to complete a second authentication factor to verify their identity.",
+        "learn_more_links": [
+          {
+            "text": "PIN verification",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>Critical operations such as password updates, email address changes, and disabling two-factor authentication require the logged-in user to complete a second authentication factor to verify their i",
+        "quality_score": 100,
+        "category": "Security",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-security-31",
+        "section": "Security",
+        "introduced_in": "11.42",
+        "product": "Multi-Person Authorization",
+        "change": "Multi-Person Authorization offers user-friendly operations, giving tenant users greater flexibility to select their own approver group. The following enhancements were added to Multi-Person Authorization: Operation-specific exclusions: Most MPA operations support dedicated exclusion lists for users ",
+        "learn_more_links": [
+          {
+            "text": "Multi-Person Authorization to Minimize Insider Threat",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>Multi-Person Authorization offers user-friendly operations, giving tenant users greater flexibility to select their own approver group.</p>\n<p>The following enhancements were added to Multi-Person",
+        "quality_score": 80,
+        "category": "Security",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-security-32",
+        "section": "Security",
+        "introduced_in": "11.42.29",
+        "product": "Custom Workflows and Reports",
+        "change": "Security enhancements for Custom Workflows and Reports using authorization codes and the Developer Tools package.",
+        "learn_more_links": [
+          {
+            "text": "Enhanced Security for Custom Workflows and Reports",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>Security enhancements for Custom Workflows and Reports using authorization codes and the Developer Tools package.</p>\n",
+        "quality_score": 100,
+        "category": "Security",
+        "mapping_confidence": 100
+      }
+    ],
+    "Database": [
+      {
+        "id": "11.44-databases-18",
+        "section": "Databases",
+        "introduced_in": "11.42",
+        "product": "Amazon DocumentDB, Amazon RDS, Amazon Redshift",
+        "change": "Commvault now adds the commvault:createdBy and commvault:vendor tags to resources created during backup and restore operations.",
+        "learn_more_links": [
+          {
+            "text": "Support and Usage of AWS Resource Tags for Amazon DocumentDB Protection",
+            "href": ""
+          },
+          {
+            "text": "Support and Usage of AWS Resource Tags for Amazon RDS Protection",
+            "href": ""
+          },
+          {
+            "text": "Support and Usage of AWS Resource Tags for Amazon Redshift Protection",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>Commvault now adds the <code>commvault:createdBy</code> and <code>commvault:vendor</code> tags to resources created during backup and restore operations.</p>\n",
+        "quality_score": 100,
+        "category": "Database",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-sql-server-33",
+        "section": "SQL Server",
+        "introduced_in": "11.42",
+        "product": "SQL Server Backup",
+        "change": "The 75% differential size rule (which initiates conversion to full backup) is turned off in 11.42 Cumulative Update 29 and later.",
+        "learn_more_links": [
+          {
+            "text": "Automatic Backup Plan Schedules and Associated Conversion Rules",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "The 75% differential size rule (which initiates conversion to full backup) is turned off in 11.42 Cumulative Update 29 and later.",
+        "quality_score": 100,
+        "category": "Database",
+        "mapping_confidence": 100
+      }
+    ],
+    "Storage": [
+      {
+        "id": "11.44-storage-34",
+        "section": "Storage",
+        "introduced_in": "11.42",
+        "product": "Cloud Storage",
+        "change": "The Auto-archive recalled files on restore job completion operation is deprecated. You must configure a lifecycle policy to manage deletion of recalled data.",
+        "learn_more_links": [
+          {
+            "text": "Deprecation Notice for Auto-Archive Recalled Files on Restore Job Completion",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>The Auto-archive recalled files on restore job completion operation is deprecated. You must configure a lifecycle policy to manage deletion of recalled data.</p>\n",
+        "quality_score": 100,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-35",
+        "section": "Storage",
+        "introduced_in": "11.42",
+        "product": "Cloud Storage",
+        "change": "If Clients or CommServe are upgraded before MediaAgents, restore operations using previously recalled archive data may fail. To ensure successful restores, upgrade all MediaAgents to the latest version and perform a new recall.",
+        "learn_more_links": [],
+        "raw_change_html": "\n<p>If Clients or CommServe are upgraded before MediaAgents, restore operations using previously recalled archive data may fail. To ensure successful restores, upgrade all MediaAgents to the latest ve",
+        "quality_score": 100,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-36",
+        "section": "Storage",
+        "introduced_in": "11.42",
+        "product": "Cloud Storage",
+        "change": "Commvault supports HTTPS only for Service Host URLs. Make sure the Cloud Storage Server and Cloud Storage Service Host Endpoints have HTTPS protocol enabled.",
+        "learn_more_links": [],
+        "raw_change_html": "\n<p>Commvault supports HTTPS only for Service Host URLs. Make sure the Cloud Storage Server and Cloud Storage Service Host Endpoints have HTTPS protocol enabled.</p>\n",
+        "quality_score": 100,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-37",
+        "section": "Storage",
+        "introduced_in": "11.42",
+        "product": "Cloud Storage\nDisk Library",
+        "change": "On the Configuration page (Storage and Copy Levels): The WORM tile has been renamed to Immutability. The WORM storage lock option has been renamed to Storage lock. On the Storage list page, the following new columns have been added: Immutability: Displays whether Compliance lock is enabled or disabl",
+        "learn_more_links": [
+          {
+            "text": "Configuring WORM Storage Mode on Disk Libraries",
+            "href": ""
+          },
+          {
+            "text": "Configuring Storage Lock",
+            "href": ""
+          },
+          {
+            "text": "Configuring WORM Storage Mode on Cloud Storage",
+            "href": ""
+          },
+          {
+            "text": "Configuring Storage Lock",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<ul>\n<li>\n<p>On the <strong>Configuration page</strong> (Storage and Copy Levels):</p>\n<ul>\n<li>The <strong>WORM</strong> tile has been renamed to <strong>Immutability</strong>.</li>\n<li>The <strong>",
+        "quality_score": 80,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-38",
+        "section": "Storage",
+        "introduced_in": "11.42",
+        "product": "Schedules and Schedule Policies",
+        "change": "You can schedule an auxiliary copy operation for all copies within a region of a storage policy or for selected copies in that region. You can also create schedule policies for the following operations: Auxiliary copy Space reclamation Data verification",
+        "learn_more_links": [
+          {
+            "text": "Scheduling Auxiliary Copy Operation for a Storage Policy",
+            "href": ""
+          },
+          {
+            "text": "Creating a Schedule Policy for Auxiliary Copy Operation",
+            "href": ""
+          },
+          {
+            "text": "Creating a Schedule Policy for Space Reclamation Operation",
+            "href": ""
+          },
+          {
+            "text": "Creating a Schedule Policy for Data Verification Operation",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>You can schedule an auxiliary copy operation for all copies within a region of a storage policy or for selected copies in that region.</p>\n<p>You can also create schedule policies for the followin",
+        "quality_score": 100,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-39",
+        "section": "Storage",
+        "introduced_in": "11.42",
+        "product": "Storage",
+        "change": "You can view jobs for a storage.",
+        "learn_more_links": [
+          {
+            "text": "Viewing Jobs for a Storage",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>You can view jobs for a storage.</p>\n",
+        "quality_score": 100,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-40",
+        "section": "Storage",
+        "introduced_in": "11.44",
+        "product": "Deduplication",
+        "change": "If horizontal scaling is disabled in a CommCell environment running a version earlier than Commvault Long-Term Support Release 11.44, the feature is automatically enabled when you upgrade to Commvault Long-Term Support Release 11.44. However, horizontal scaling applies only to storage pools created ",
+        "learn_more_links": [
+          {
+            "text": "Deduplication Building Block Guide",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>If horizontal scaling is disabled in a CommCell environment running a version earlier than Commvault Long-Term Support Release 11.44, the feature is automatically enabled when you upgrade to Commv",
+        "quality_score": 100,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-41",
+        "section": "Storage",
+        "introduced_in": "11.42",
+        "product": "Air Gap Protect",
+        "change": "Air Gap Protect supports the following archive cloud storage services: Air Gap Protect Azure Archive Air Gap Protect AWS Archive Air Gap Protect Google Archive Air Gap Protect OCI Archive When you create Air Gap Protect storage, you can select Archive storage class and select corresponding cloud sto",
+        "learn_more_links": [
+          {
+            "text": "Create Air Gap Protect storage",
+            "href": ""
+          },
+          {
+            "text": "Archive Storage Tier",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>Air Gap Protect supports the following archive cloud storage services:</p>\n<ul>\n<li>Air Gap Protect Azure Archive</li>\n<li>Air Gap Protect AWS Archive</li>\n<li>Air Gap Protect Google Archive</li>\n",
+        "quality_score": 100,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-42",
+        "section": "Storage",
+        "introduced_in": "11.42",
+        "product": "Cloud Storage",
+        "change": "The cloud storage name Hitachi Content Platform has been updated to Hitachi Content Platform (REST API).",
+        "learn_more_links": [],
+        "raw_change_html": "\n<p>The cloud storage name <strong>Hitachi Content Platform</strong> has been updated to <strong>Hitachi Content Platform (REST API)</strong>.  </p>\n",
+        "quality_score": 100,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-43",
+        "section": "Storage",
+        "introduced_in": "11.42",
+        "product": "Air Gap Protect",
+        "change": "For the following storage, when defragmentation reaches 30%, space reclamation runs automatically: Azure Blob Storage Azure Blob Storage in Air Gap Protect",
+        "learn_more_links": [
+          {
+            "text": "Running space reclamation for deduplicated backup storage",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>For the following storage, when defragmentation reaches 30%, space reclamation runs automatically:</p>\n<ul>\n<li>Azure Blob Storage</li>\n<li>Azure Blob Storage in Air Gap Protect</li>\n</ul>\n",
+        "quality_score": 100,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-44",
+        "section": "Storage",
+        "introduced_in": "11.42",
+        "product": "Air Gap Protect",
+        "change": "The storage class Frequent Access, previously associated with the Air Gap Protect Azure Hot GRS license, has been renamed to Frequent Access (Multi-Region). A new license, Air Gap Protect Azure Frequent Access, is being introduced with the storage class named Frequent Access. Both options represent ",
+        "learn_more_links": [
+          {
+            "text": "Storage redundancy for Air Gap Protect storage",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>The storage class Frequent Access, previously associated with the Air Gap Protect Azure Hot GRS license, has been renamed to Frequent Access (Multi-Region).</p>\n<p>A new license, Air Gap Protect A",
+        "quality_score": 80,
+        "category": "Storage",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-storage-45",
+        "section": "Storage",
+        "introduced_in": "11.44",
+        "product": "Commvault Grid\nCommvault Flex Appliance\nCommvault Edge",
+        "change": "The registration workflow for Commvault Grid, Commvault Flex Appliance and Commvault Edge deployments on VaultOS 9 Operating System has been simplified to provide a unified registration experience. Registration now uses an authentication code and a single CommServeGateway Hostname field that accepts",
+        "learn_more_links": [
+          {
+            "text": "Commvault Storage Solutions",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "\n<p>The registration workflow for Commvault Grid, Commvault Flex Appliance and Commvault Edge deployments on VaultOS 9 Operating System has been simplified to provide a unified registration experience",
+        "quality_score": 80,
+        "category": "Storage",
+        "mapping_confidence": 100
+      }
+    ],
+    "Platform": [
+      {
+        "id": "11.44-commcell-management-10",
+        "section": "CommCell Management",
+        "introduced_in": "11.42",
+        "product": "User groups",
+        "change": "Tenant administrators can now include navigation items for a user group.",
+        "learn_more_links": [
+          {
+            "text": "Customizing the Navigation Menu for a User Group",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "Tenant administrators can now include navigation items for a user group.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-commcell-management-11",
+        "section": "CommCell Management",
+        "introduced_in": "11.42",
+        "product": "Users",
+        "change": "Credential details are organized under Overview and Associations tabs.The Overview tab provides a consolidated view of the general configuration information and security-related information of the credential. You can update these details using the corresponding edit options. The Associations tab pro",
+        "learn_more_links": [
+          {
+            "text": "Updating a Credential in a Built-in Credential Vault",
+            "href": ""
+          },
+          {
+            "text": "Updating a Credential Vault",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "Credential details are organized under <strong>Overview</strong> and <strong>Associations</strong> tabs.</br>The <strong>Overview</strong> tab provides a consolidated view of the general configuration",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-commcell-management-12",
+        "section": "CommCell Management",
+        "introduced_in": "11.42",
+        "product": "Entities",
+        "change": "Tagging is now supported for Command Center entities, including MediaAgents, Storage (Disk, Cloud, Tape, Hyperscale), and Plans. With tags, you can efficiently organize, search, and manage these entities.",
+        "learn_more_links": [
+          {
+            "text": "Creating a Tag for an Entity",
+            "href": ""
+          },
+          {
+            "text": "Entity Tags",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "Tagging is now supported for Command Center entities, including MediaAgents, Storage (Disk, Cloud, Tape, Hyperscale), and Plans. With tags, you can efficiently organize, search, and manage these entit",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-commcell-management-13",
+        "section": "CommCell Management",
+        "introduced_in": "11.42",
+        "product": "Plans",
+        "change": "When you convert or promote an Air Gap Protect Infrequent Access copy to a primary copy, all other copies associated with the storage policy are automatically disabled. Once disabled, you cannot re-enable these copies.During plan creation, Serverless Log Backups are enabled by default for newly crea",
+        "learn_more_links": [
+          {
+            "text": "Promoting a Secondary Copy to Primary Copy",
+            "href": ""
+          },
+          {
+            "text": "Serverless Log Backups",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "<ul><li>When you convert or promote an Air Gap Protect Infrequent Access copy to a primary copy, all other copies associated with the storage policy are automatically disabled. Once disabled, you cann",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-commcell-management-14",
+        "section": "CommCell Management",
+        "introduced_in": "11.42",
+        "product": "Web Console",
+        "change": "Creating schedules or sending emails from any Report page in the Web Console application is no longer supported. This change applies only to existing users of the Web Console.",
+        "learn_more_links": [],
+        "raw_change_html": "Creating schedules or sending emails from any Report page in the Web Console application is no longer supported. This change applies only to existing users of the Web Console.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-commcell-management-15",
+        "section": "CommCell Management",
+        "introduced_in": "11.42.72",
+        "product": "Reports",
+        "change": "Updated the Service Provider Billing label to Detailed Billing.",
+        "learn_more_links": [],
+        "raw_change_html": "Updated the <strong>Service Provider Billing</strong> label to <strong>Detailed Billing</strong>.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-commcell-management-16",
+        "section": "CommCell Management",
+        "introduced_in": "11.42",
+        "product": "Alerts",
+        "change": "Due to the merge of the Disk Growth Report and the Cloud Growth Report, the existing alert schedules may no longer function as expected. Create new alert schedules or migrate the existing ones to the consolidated report titled Storage Growth.",
+        "learn_more_links": [],
+        "raw_change_html": "Due to the merge of the <strong>Disk Growth Report</strong> and the <strong>Cloud Growth Report</strong>, the existing alert schedules may no longer function as expected. Create new alert schedules or",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-install-and-deployment-19",
+        "section": "Install and Deployment",
+        "introduced_in": "11.42",
+        "product": "Upgrades",
+        "change": "When you upgrade the CommServe computer to the latest platform release, a pre-upgrade check will be performed to verify that the CommServe DB (data) size is not greater than 400 GB. If the CommServe DB (data) size exceeds this limit, the upgrade will be blocked. For assistance with the CommServe upg",
+        "learn_more_links": [],
+        "raw_change_html": "When you upgrade the CommServe computer to the latest platform release, a pre-upgrade check will be performed to verify that the CommServe DB (data) size is not greater than 400 GB. If the CommServe D",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-install-and-deployment-20",
+        "section": "Install and Deployment",
+        "introduced_in": "11.42",
+        "product": "Installations",
+        "change": "Due to potential security issues from weak SSH ciphers, the push install feature for Linux and UNIX servers is disabled by default. You can re‑enable this functionality by configuring the PatchEnableUnixPushInstall additional setting.",
+        "learn_more_links": [
+          {
+            "text": "Adding an Additional Server",
+            "href": ""
+          },
+          {
+            "text": "Adding an Additional Server for File System",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "Due to potential security issues from weak SSH ciphers, the push install feature for Linux and UNIX servers is disabled by default. You can re‑enable this functionality by configuring the PatchEnableU",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-install-and-deployment-21",
+        "section": "Install and Deployment",
+        "introduced_in": "11.40",
+        "product": "Installations",
+        "change": "You can no longer install the Commvault control plane on Windows, which includes only the CommServe server, the Web Server, and the Command Center components. Commvault strongly encourages you to transition to a Linux environment for Control plane components. The Linux platform offers significantly ",
+        "learn_more_links": [],
+        "raw_change_html": "You can no longer install the Commvault control plane on Windows, which includes only the CommServe server, the Web Server, and the Command Center components. Commvault strongly encourages you to tran",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 100
+      },
+      {
+        "id": "11.44-commvault-store-17",
+        "section": "Commvault Store",
+        "introduced_in": "11.42",
+        "product": "Commvault Store",
+        "change": "The Commvault Store has a refreshed design and now requires a log-in to view the store. All existing functionality remains unchanged.",
+        "learn_more_links": [
+          {
+            "text": "Commvault Store",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "The Commvault Store has a refreshed design and now requires a log-in to view the store. All existing functionality remains unchanged.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 95
+      },
+      {
+        "id": "11.44-backup-and-restore-agents-1",
+        "section": "Backup and Restore Agents",
+        "introduced_in": "11.42",
+        "product": "Exchange Mailbox Backup Quota for End Users",
+        "change": "You can no longer manage backup quota for Exchange Mailbox in the CommCell Console. You can continue using the existing configurations but no further support or enhancements will be provided.",
+        "learn_more_links": [
+          {
+            "text": "Deprecation Notice for Exchange Mailbox Backup Quota in CommCell Console",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "You can no longer manage backup quota for Exchange Mailbox in the CommCell Console. You can continue using the existing configurations but no further support or enhancements will be provided.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-backup-and-restore-agents-2",
+        "section": "Backup and Restore Agents",
+        "introduced_in": "11.42",
+        "product": "Retention Tags - Exchange Mailbox",
+        "change": "You can no longer manage retention using retention tags for Exchange Mailbox in the CommCell Console. You can continue using the existing configurations but no further support or enhancements will be provide.",
+        "learn_more_links": [
+          {
+            "text": "Deprecation Notice for Retention Tags for Exchange Mailbox Agents in CommCell Console",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "You can no longer manage retention using retention tags for Exchange Mailbox in the CommCell Console. You can continue using the existing configurations but no further support or enhancements will be ",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-backup-and-restore-agents-3",
+        "section": "Backup and Restore Agents",
+        "introduced_in": "11.42",
+        "product": "Salesforce",
+        "change": "You can no longer create new pseudo-clients for Salesforce in the CommCell Console. You can continue using the existing pseudo-clients to perform backup and restore operations.",
+        "learn_more_links": [
+          {
+            "text": "Deprecation Notice for Adding New Salesforce Clients in CommCell Console",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "You can no longer create new pseudo-clients for Salesforce in the CommCell Console. You can continue using the existing pseudo-clients to perform backup and restore operations.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-backup-and-restore-agents-4",
+        "section": "Backup and Restore Agents",
+        "introduced_in": "11.42",
+        "product": "SharePoint Online",
+        "change": "On April 2 2026, Microsoft will fully retire Azure ACS for all tenants. Because of this change, you must reconfigure SharePoint Online to use certificate-based authentication. We recommend upgrading to Commvault Cloud 11.40 or a more recent release. All Commvault Cloud customers must reconfigure the",
+        "learn_more_links": [
+          {
+            "text": "Create an Azure Certificate for SharePoint Online",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "On April 2 2026, Microsoft will fully retire Azure ACS for all tenants. Because of this change, you must reconfigure SharePoint Online to use certificate-based authentication. We recommend upgrading t",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-backup-and-restore-agents-5",
+        "section": "Backup and Restore Agents",
+        "introduced_in": "11.42",
+        "product": "Snapshots",
+        "change": "You can now create volume group snapshots for IBM FlashSystem Storage Arrays using the new IBM Volume Group Snap engine. To use this feature, configure the array in the IBM array software and add the desired volumes to the volume group before initiating the snapshot.",
+        "learn_more_links": [
+          {
+            "text": "System Requirements for the IBM FlashSystem Storage Array",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "You can now create volume group snapshots for IBM FlashSystem Storage Arrays using the new IBM Volume Group Snap engine. To use this feature, configure the array in the IBM array software and add the ",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-backup-and-restore-agents-6",
+        "section": "Backup and Restore Agents",
+        "introduced_in": "11.42",
+        "product": "Files",
+        "change": "A new default option, Use optimal number of restore streams is introduced to the file server Restore dialog box. The optimal number of restore streams is automatically calculated based on the restore dataset size. Users can disable this option to manually specify the number of restore streams.",
+        "learn_more_links": [
+          {
+            "text": "Performing File Server Restores",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "A new default option, <strong>Use optimal number of restore streams</strong> is introduced to the file server <strong>Restore</strong> dialog box. The optimal number of restore streams is automaticall",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-backup-and-restore-agents-7",
+        "section": "Backup and Restore Agents",
+        "introduced_in": "11.42.60",
+        "product": "Files",
+        "change": "You can now perform snapshot backups of CIFS shares of NetApp and Dell EMC Isilon/PowerScale file servers through Linux access nodes.",
+        "learn_more_links": [],
+        "raw_change_html": "You can now perform snapshot backups of CIFS shares of NetApp and Dell EMC Isilon/PowerScale file servers through Linux access nodes.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-backup-and-restore-agents-8",
+        "section": "Backup and Restore Agents",
+        "introduced_in": "11.42.90",
+        "product": "1-Touch for Linux Computers",
+        "change": "The 1-Touch Backup process on Linux clients uses the following default directory for job results: /iDataAgent/jobResults/. This replaces the previously used /tmp directory.",
+        "learn_more_links": [
+          {
+            "text": "System Requirements for 1-Touch for Linux",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "The 1-Touch Backup process on Linux clients uses the following default directory for job results:</br> <code>/iDataAgent/jobResults/</code>.</br> This replaces the previously used <code>/tmp</code> di",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-backup-and-restore-agents-9",
+        "section": "Backup and Restore Agents",
+        "introduced_in": "11.42.110",
+        "product": "Files",
+        "change": "You can now perform streaming and snapshot backups of CIFS shares of NutanixFiles and streaming backups of Qumulo File Storage servers through Linux access nodes.",
+        "learn_more_links": [
+          {
+            "text": "Complete the File Server Guided Setup for Nutanix Files Exported to CIFS",
+            "href": ""
+          },
+          {
+            "text": "Complete the File Server Guided Setup for Qumulo Files Exported to CIFS",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "You can now perform streaming and snapshot backups of CIFS shares of NutanixFiles and streaming backups of Qumulo File Storage servers through Linux access nodes.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-reports-23",
+        "section": "Reports",
+        "introduced_in": "11.42",
+        "product": "Metrics Reports",
+        "change": "The Cloud Library Growth report and Disk Library Growth reports have now been consolidated into a single report called the Storage Growth Report.",
+        "learn_more_links": [
+          {
+            "text": "Storage Growth Report",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "The Cloud Library Growth report and Disk Library Growth reports have now been consolidated into a single report called the <strong>Storage Growth Report</strong>.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-reports-24",
+        "section": "Reports",
+        "introduced_in": "11.42.90",
+        "product": "Commvault Store Reports",
+        "change": "The Estimated Storage Utilization report is deprecated. It will remain available with no enhancements and maintenance fixes. It is recommended to use the Storage Utilization report as an alternative.",
+        "learn_more_links": [
+          {
+            "text": "Storage Utilization Report",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "The Estimated Storage Utilization report is deprecated. It will remain available with no enhancements and maintenance fixes. It is recommended to use the Storage Utilization report as an alternative.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-reports-25",
+        "section": "Reports",
+        "introduced_in": "11.42.90",
+        "product": "Command Center Reports",
+        "change": "The Disk Library Growth Trend report is deprecated. It will remain available with no enhancements and maintenance fixes. It is recommended to use the Storage Growth report as an alternative.",
+        "learn_more_links": [
+          {
+            "text": "Storage Growth Report",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "The Disk Library Growth Trend report is deprecated. It will remain available with no enhancements and maintenance fixes. It is recommended to use the Storage Growth report as an alternative.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      },
+      {
+        "id": "11.44-reports-26",
+        "section": "Reports",
+        "introduced_in": "11.42.90",
+        "product": "Command Center Reports",
+        "change": "The Storage Usage report is deprecated. It will remain available with no enhancements and maintenance fixes. It is recommended to use the Storage Growth report as an alternative.",
+        "learn_more_links": [
+          {
+            "text": "Storage Growth Report",
+            "href": ""
+          }
+        ],
+        "raw_change_html": "The Storage Usage report is deprecated. It will remain available with no enhancements and maintenance fixes. It is recommended to use the Storage Growth report as an alternative.",
+        "quality_score": 100,
+        "category": "Platform",
+        "mapping_confidence": 90
+      }
+    ],
+    "Performance": []
+  },
+  "statistics": {
+    "total_features": 48,
+    "features_by_category": {
+      "Virtualization": 4,
+      "Security": 6,
+      "Database": 2,
+      "Storage": 12,
+      "Platform": 24,
+      "Performance": 0
+    },
+    "unmapped_features": 0,
+    "mapping_coverage": "100%"
+  }
+}

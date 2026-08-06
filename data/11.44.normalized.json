@@ -1,0 +1,46 @@
+{
+  "version": "11.44",
+  "releaseDate": "2023-04-15",
+  "dataSource": "Live Commvault Documentation",
+  "categories": {
+    "Virtualization": [
+      {
+        "id": "11.44-virtualization-1",
+        "title": "Protect VMware vSphere VMs VMware Cloud Director Backup and Restore Agents CommCell Management Commv",
+        "description": "Protect VMware vSphere VMs VMware Cloud Director Backup and Restore Agents CommCell Management Commvault Store Databases Install and Deployment Kubernetes Reports Security SQL Server Storage Virtualization",
+        "source_heading": "Virtualization"
+      }
+    ],
+    "Security": [],
+    "Database": [
+      {
+        "id": "11.44-database-1",
+        "title": "Support and Usage of AWS Resource Tags for Amazon DocumentDB Protection Support and Usage of AWS Res",
+        "description": "Support and Usage of AWS Resource Tags for Amazon DocumentDB Protection Support and Usage of AWS Resource Tags for Amazon RDS Protection Support and Usage of AWS Resource Tags for Amazon Redshift Protection",
+        "source_heading": "Databases"
+      }
+    ],
+    "Storage": [],
+    "Platform": [
+      {
+        "id": "11.44-platform-1",
+        "title": "Complete the File Server Guided Setup for Nutanix Files Exported to CIFSComplete the File Server Gui",
+        "description": "Complete the File Server Guided Setup for Nutanix Files Exported to CIFSComplete the File Server Guided Setup for Qumulo Files Exported to CIFS",
+        "source_heading": "Backup and Restore Agents"
+      },
+      {
+        "id": "11.44-platform-2",
+        "title": "Adding an Additional ServerAdding an Additional Server for File System",
+        "description": "Adding an Additional ServerAdding an Additional Server for File System",
+        "source_heading": "Install and Deployment"
+      }
+    ],
+    "Performance": []
+  },
+  "metadata": {
+    "fetchedAt": "2026-08-06T10:40:58.784Z",
+    "pageTitle": "Changes in Long-Term Support Release 11.44",
+    "totalChanges": 4,
+    "extractionNotes": "Extracted from live documentation using heading-based parsing"
+  }
+}

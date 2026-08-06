@@ -1,0 +1,40 @@
+{
+  "version": "11.44",
+  "url": "https://documentation.commvault.com/11.44/software/changes_in_long_term_support_release_11_44.html",
+  "fetchedAt": "2026-08-06T10:36:22.299Z",
+  "pageTitle": "Changes in Long-Term Support Release 11.44",
+  "headingsCount": 13,
+  "listItemsCount": 13,
+  "headings": [
+    "Changes in Long-Term Support Release 11.44",
+    "Backup and Restore Agents",
+    "CommCell Management",
+    "Commvault Store",
+    "Databases",
+    "Install and Deployment",
+    "Kubernetes",
+    "Reports",
+    "Security",
+    "SQL Server",
+    "Storage",
+    "Virtualization",
+    "Page contents"
+  ],
+  "listItems": [
+    "When you convert or promote an Air Gap Protect Infrequent Access copy to a primary copy, all other copies associated with the storage policy are automatically disabled. Once disabled, you cannot re-enable these copies.",
+    "During plan creation, Serverless Log Backups are enabled by default for newly created plans.",
+    "Azure Key Vault",
+    "BeyondTrust",
+    "Delinea",
+    "Air Gap Protect Azure Archive",
+    "Air Gap Protect AWS Archive",
+    "Air Gap Protect Google Archive",
+    "Air Gap Protect OCI Archive",
+    "Azure Blob Storage",
+    "Azure Blob Storage in Air Gap Protect",
+    "If you use the older Hot GRS license, you will see Frequent Access (Multi-Region).",
+    "If you use the new license, you will see Frequent Access (without \"Multi-Region\")."
+  ],
+  "rawHtmlLength": 52030,
+  "status": "success"
+}

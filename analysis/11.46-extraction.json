@@ -1,0 +1,28 @@
+{
+  "version": "11.46",
+  "url": "https://documentation.commvault.com/11.46/software/changes_in_innovation_release_11_46.html",
+  "analysisTime": "2026-08-06T10:52:42.505Z",
+  "cssSelectors": {
+    "mainContent": "article",
+    "sectionHeading": "h2",
+    "features": "ul > li"
+  },
+  "sections": [
+    {
+      "heading": "CommCell Management",
+      "rawHTMLSnippet": "<h2 id=\"commcell-management\">CommCell Management</h2>\n<table>\n<thead>\n<tr>\n<th>Introduced in</th>\n<th>Product</th>\n<th>Change</th>\n<th>Learn more</th>\n</tr>\n</thead>\n<tbody>\n<tr>\n<td>11.46.10</td>\n<td>Configuration for Version 9 and Version 10 clients</td>\n<td>Starting with release 11.46.10, Commvault Version 9 or Version 10 clients in a CommCell environment will no longer communicate with each other unless the <a class=\"link-external\" href=\"https://documentation.commvault.com/additionalsetting/",
+      "extractedItems": [],
+      "extractionNotes": "No list items found - section may be empty or use different structure"
+    }
+  ],
+  "overallProblems": [
+    "Empty sections found",
+    "No features extracted from entire page"
+  ],
+  "parserRecommendations": [
+    "✓ Main structure identified: 1 H2 sections",
+    "❌ 2 overall problems detected",
+    "📊 Total items extracted: 0 from 1 sections",
+    "⚠ Very few items (0) - consider adjusting extraction depth"
+  ]
+}

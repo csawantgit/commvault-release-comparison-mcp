@@ -6,6 +6,7 @@ import { CacheManager } from "./cacheManager.js";
 export class ReleaseDataLoader {
     constructor(dataSources, cacheTTLMinutes = 60) {
         this.loadingPromises = new Map();
+        this.sourceUsed = new Map(); // Track which source loaded each version
         this.dataSources = new Map(dataSources.map((ds) => [ds.name, ds]));
         this.cache = new CacheManager(cacheTTLMinutes);
     }
@@ -43,6 +44,7 @@ export class ReleaseDataLoader {
                 console.error(`[Loading] ${version} from ${sourceName}...`);
                 const data = await dataSource.fetch(version);
                 this.cache.set(cacheKey, data);
+                this.sourceUsed.set(version, sourceName); // Track which source was used
                 console.error(`[Loaded] ${version} from ${sourceName} (${Object.keys(data.categories).length} categories)`);
                 return data;
             }
@@ -78,6 +80,22 @@ export class ReleaseDataLoader {
      */
     getDataSources() {
         return Array.from(this.dataSources.keys());
+    }
+    /**
+     * Get the source used for a version
+     */
+    getSourceUsed(version) {
+        return this.sourceUsed.get(version) || "Unknown";
+    }
+    /**
+     * Get all source usage info
+     */
+    getSourceUsageInfo() {
+        const result = {};
+        for (const [version, source] of this.sourceUsed) {
+            result[version] = source;
+        }
+        return result;
     }
     /**
      * Get cache statistics
