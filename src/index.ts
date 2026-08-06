@@ -1,15 +1,89 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import {
-  CallToolResult,
-  ListToolsResult,
   Tool,
+  ListToolsRequestSchema,
+  CallToolRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
 
 const server = new Server({
   name: "commvault-release-comparison",
   version: "1.0.0",
 });
+
+server.registerCapabilities({
+  tools: {},
+});
+
+// Define request handlers
+const requestHandlers = {
+  "tools/list": async () => {
+    return {
+      tools,
+    };
+  },
+  "tools/call": async (request: any) => {
+    const { name, arguments: args } = request.params;
+
+    try {
+      let result: object;
+
+      switch (name) {
+        case "compare_releases":
+          result = await handleCompareReleases(
+            args.version1 as string,
+            args.version2 as string
+          );
+          break;
+
+        case "get_release_changes":
+          result = await handleGetReleaseChanges(
+            args.version as string,
+            args.category as string | undefined
+          );
+          break;
+
+        case "get_category_changes":
+          result = await handleGetCategoryChanges(
+            args.category as string,
+            args.start_version as string | undefined,
+            args.end_version as string | undefined
+          );
+          break;
+
+        case "generate_summary":
+          result = await handleGenerateSummary(
+            args.version as string,
+            args.format as string | undefined,
+            args.include_metrics as boolean | undefined
+          );
+          break;
+
+        default:
+          throw new Error(`Unknown tool: ${name}`);
+      }
+
+      return {
+        content: [
+          {
+            type: "text",
+            text: JSON.stringify(result, null, 2),
+          },
+        ],
+      };
+    } catch (error) {
+      return {
+        content: [
+          {
+            type: "text",
+            text: `Error: ${error instanceof Error ? error.message : String(error)}`,
+          },
+        ],
+        isError: true,
+      };
+    }
+  },
+};
 
 // Tool definitions
 const tools: Tool[] = [
@@ -297,75 +371,11 @@ The ${version} release brings significant improvements to backup scalability, di
   return baseResult;
 }
 
-// Handler for listing tools
-server.setRequestHandler("tools/list" as any, async (): Promise<ListToolsResult> => {
-  return {
-    tools,
-  };
-});
-
-// Handler for calling tools
-server.setRequestHandler("tools/call" as any, async (request: any): Promise<CallToolResult> => {
-  const { name, arguments: args } = request.params;
-
-    try {
-      let result: object;
-
-      switch (name) {
-        case "compare_releases":
-          result = await handleCompareReleases(
-            args.version1 as string,
-            args.version2 as string
-          );
-          break;
-
-        case "get_release_changes":
-          result = await handleGetReleaseChanges(
-            args.version as string,
-            args.category as string | undefined
-          );
-          break;
-
-        case "get_category_changes":
-          result = await handleGetCategoryChanges(
-            args.category as string,
-            args.start_version as string | undefined,
-            args.end_version as string | undefined
-          );
-          break;
-
-        case "generate_summary":
-          result = await handleGenerateSummary(
-            args.version as string,
-            args.format as string | undefined,
-            args.include_metrics as boolean | undefined
-          );
-          break;
-
-        default:
-          throw new Error(`Unknown tool: ${name}`);
-      }
-
-      return {
-        content: [
-          {
-            type: "text",
-            text: JSON.stringify(result, null, 2),
-          },
-        ],
-      };
-    } catch (error) {
-      return {
-        content: [
-          {
-            type: "text",
-            text: `Error: ${error instanceof Error ? error.message : String(error)}`,
-          },
-        ],
-        isError: true,
-      };
-    }
-  }
+// Register handlers with SDK schemas
+server.setRequestHandler(ListToolsRequestSchema, requestHandlers["tools/list"] as any);
+server.setRequestHandler(
+  CallToolRequestSchema,
+  requestHandlers["tools/call"] as any
 );
 
 // Start the server

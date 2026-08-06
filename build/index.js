@@ -1,10 +1,62 @@
-#!/usr/bin/env node
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
+import { ListToolsRequestSchema, CallToolRequestSchema, } from "@modelcontextprotocol/sdk/types.js";
 const server = new Server({
     name: "commvault-release-comparison",
     version: "1.0.0",
 });
+server.registerCapabilities({
+    tools: {},
+});
+// Define request handlers
+const requestHandlers = {
+    "tools/list": async () => {
+        return {
+            tools,
+        };
+    },
+    "tools/call": async (request) => {
+        const { name, arguments: args } = request.params;
+        try {
+            let result;
+            switch (name) {
+                case "compare_releases":
+                    result = await handleCompareReleases(args.version1, args.version2);
+                    break;
+                case "get_release_changes":
+                    result = await handleGetReleaseChanges(args.version, args.category);
+                    break;
+                case "get_category_changes":
+                    result = await handleGetCategoryChanges(args.category, args.start_version, args.end_version);
+                    break;
+                case "generate_summary":
+                    result = await handleGenerateSummary(args.version, args.format, args.include_metrics);
+                    break;
+                default:
+                    throw new Error(`Unknown tool: ${name}`);
+            }
+            return {
+                content: [
+                    {
+                        type: "text",
+                        text: JSON.stringify(result, null, 2),
+                    },
+                ],
+            };
+        }
+        catch (error) {
+            return {
+                content: [
+                    {
+                        type: "text",
+                        text: `Error: ${error instanceof Error ? error.message : String(error)}`,
+                    },
+                ],
+                isError: true,
+            };
+        }
+    },
+};
 // Tool definitions
 const tools = [
     {
@@ -257,54 +309,9 @@ The ${version} release brings significant improvements to backup scalability, di
     }
     return baseResult;
 }
-// Handler for listing tools
-server.setRequestHandler("tools/list", async () => {
-    return {
-        tools,
-    };
-});
-// Handler for calling tools
-server.setRequestHandler("tools/call", async (request) => {
-    const { name, arguments: args } = request.params;
-    try {
-        let result;
-        switch (name) {
-            case "compare_releases":
-                result = await handleCompareReleases(args.version1, args.version2);
-                break;
-            case "get_release_changes":
-                result = await handleGetReleaseChanges(args.version, args.category);
-                break;
-            case "get_category_changes":
-                result = await handleGetCategoryChanges(args.category, args.start_version, args.end_version);
-                break;
-            case "generate_summary":
-                result = await handleGenerateSummary(args.version, args.format, args.include_metrics);
-                break;
-            default:
-                throw new Error(`Unknown tool: ${name}`);
-        }
-        return {
-            content: [
-                {
-                    type: "text",
-                    text: JSON.stringify(result, null, 2),
-                },
-            ],
-        };
-    }
-    catch (error) {
-        return {
-            content: [
-                {
-                    type: "text",
-                    text: `Error: ${error instanceof Error ? error.message : String(error)}`,
-                },
-            ],
-            isError: true,
-        };
-    }
-});
+// Register handlers with SDK schemas
+server.setRequestHandler(ListToolsRequestSchema, requestHandlers["tools/list"]);
+server.setRequestHandler(CallToolRequestSchema, requestHandlers["tools/call"]);
 // Start the server
 async function main() {
     const transport = new StdioServerTransport();
