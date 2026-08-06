@@ -1,0 +1,41 @@
+{
+  "name": "commvault-release-comparison-mcp",
+  "version": "1.0.0",
+  "description": "MCP server for comparing Commvault release versions and analyzing changes",
+  "main": "build/index.js",
+  "type": "module",
+  "bin": {
+    "commvault-release-comparison": "build/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "start": "node build/index.js",
+    "dev": "tsc && node build/index.js",
+    "watch": "tsc --watch"
+  },
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "keywords": [
+    "mcp",
+    "commvault",
+    "release",
+    "comparison"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  },
+  "files": [
+    "build/",
+    "package.json",
+    "package-lock.json",
+    "README.md",
+    "LICENSE"
+  ]
+}
