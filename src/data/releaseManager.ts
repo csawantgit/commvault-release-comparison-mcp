@@ -1,4 +1,5 @@
 import { ReleaseDataLoader } from "../services/releaseDataLoader.js";
+import { LiveDocumentationSource } from "../services/liveDocumentationSource.js";
 import { CommvaultDocSource } from "../services/commvaultDocSource.js";
 import { MockDataSource } from "../services/mockDataSource.js";
 import { ReleaseData } from "../services/types.js";
@@ -16,6 +17,7 @@ export class ReleaseManager {
   private constructor() {
     // Create data sources in order of preference
     const dataSources = [
+      new LiveDocumentationSource(), // Try live documentation first
       new CommvaultDocSource({
         versions: ["11.44", "11.46", "12.0", "14.0", "15.0"],
       }),
