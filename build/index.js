@@ -1,6 +1,7 @@
 import { Server } from "@modelcontextprotocol/sdk/server/index.js";
 import { StdioServerTransport } from "@modelcontextprotocol/sdk/server/stdio.js";
 import { ListToolsRequestSchema, CallToolRequestSchema, } from "@modelcontextprotocol/sdk/types.js";
+import { releases, allVersions, allCategories } from "./data/releases.js";
 const server = new Server({
     name: "commvault-release-comparison",
     version: "1.0.0",
@@ -8,70 +9,21 @@ const server = new Server({
 server.registerCapabilities({
     tools: {},
 });
-// Define request handlers
-const requestHandlers = {
-    "tools/list": async () => {
-        return {
-            tools,
-        };
-    },
-    "tools/call": async (request) => {
-        const { name, arguments: args } = request.params;
-        try {
-            let result;
-            switch (name) {
-                case "compare_releases":
-                    result = await handleCompareReleases(args.version1, args.version2);
-                    break;
-                case "get_release_changes":
-                    result = await handleGetReleaseChanges(args.version, args.category);
-                    break;
-                case "get_category_changes":
-                    result = await handleGetCategoryChanges(args.category, args.start_version, args.end_version);
-                    break;
-                case "generate_summary":
-                    result = await handleGenerateSummary(args.version, args.format, args.include_metrics);
-                    break;
-                default:
-                    throw new Error(`Unknown tool: ${name}`);
-            }
-            return {
-                content: [
-                    {
-                        type: "text",
-                        text: JSON.stringify(result, null, 2),
-                    },
-                ],
-            };
-        }
-        catch (error) {
-            return {
-                content: [
-                    {
-                        type: "text",
-                        text: `Error: ${error instanceof Error ? error.message : String(error)}`,
-                    },
-                ],
-                isError: true,
-            };
-        }
-    },
-};
 // Tool definitions
 const tools = [
     {
         name: "compare_releases",
-        description: "Compare two Commvault release versions and get a summary of differences",
+        description: "Compare two Commvault release versions and show differences category-wise",
         inputSchema: {
             type: "object",
             properties: {
                 version1: {
                     type: "string",
-                    description: "First version to compare (e.g., '2024.06')",
+                    description: `First version to compare. Available: ${allVersions.join(", ")}`,
                 },
                 version2: {
                     type: "string",
-                    description: "Second version to compare (e.g., '2024.12')",
+                    description: `Second version to compare. Available: ${allVersions.join(", ")}`,
                 },
             },
             required: ["version1", "version2"],
@@ -79,17 +31,17 @@ const tools = [
     },
     {
         name: "get_release_changes",
-        description: "Get detailed changes for a specific Commvault release version",
+        description: "Get all changes for a selected release",
         inputSchema: {
             type: "object",
             properties: {
                 version: {
                     type: "string",
-                    description: "Release version (e.g., '2024.12')",
+                    description: `Release version. Available: ${allVersions.join(", ")}`,
                 },
                 category: {
                     type: "string",
-                    description: "Optional filter by category (features, fixes, security, performance)",
+                    description: `Optional filter by category. Available: ${allCategories.join(", ")}`,
                 },
             },
             required: ["version"],
@@ -97,22 +49,21 @@ const tools = [
     },
     {
         name: "get_category_changes",
-        description: "Get all changes within a specific category across versions",
+        description: "Get changes for a selected category across releases",
         inputSchema: {
             type: "object",
             properties: {
                 category: {
                     type: "string",
-                    enum: ["features", "fixes", "security", "performance", "deprecated"],
-                    description: "Change category to retrieve",
+                    description: `Category to retrieve. Available: ${allCategories.join(", ")}`,
                 },
                 start_version: {
                     type: "string",
-                    description: "Optional start version for filtering",
+                    description: `Optional start version for filtering. Available: ${allVersions.join(", ")}`,
                 },
                 end_version: {
                     type: "string",
-                    description: "Optional end version for filtering",
+                    description: `Optional end version for filtering. Available: ${allVersions.join(", ")}`,
                 },
             },
             required: ["category"],
@@ -120,13 +71,13 @@ const tools = [
     },
     {
         name: "generate_summary",
-        description: "Generate a release summary report for marketing or documentation",
+        description: "Generate a human-readable summary for a release",
         inputSchema: {
             type: "object",
             properties: {
                 version: {
                     type: "string",
-                    description: "Release version to summarize",
+                    description: `Release version. Available: ${allVersions.join(", ")}`,
                 },
                 format: {
                     type: "string",
@@ -135,184 +86,214 @@ const tools = [
                 },
                 include_metrics: {
                     type: "boolean",
-                    description: "Include performance metrics and statistics",
+                    description: "Include change counts and statistics",
                 },
             },
             required: ["version"],
         },
     },
 ];
-// Mock data
-const mockCompareData = {
-    version1: "2024.06",
-    version2: "2024.12",
-    comparison: {
-        new_features: 24,
-        bug_fixes: 156,
-        security_patches: 12,
-        performance_improvements: 8,
-        deprecated_features: 3,
-    },
-    major_highlights: [
-        "Enhanced backup scalability for large environments",
-        "Improved disaster recovery capabilities",
-        "New AI-powered analytics dashboard",
-        "Advanced deduplication algorithms",
-    ],
-};
-const mockReleaseChanges = {
-    version: "2024.12",
-    release_date: "2024-12-15",
-    changes: {
-        features: [
-            {
-                id: "FEAT-001",
-                title: "Enhanced backup scalability",
-                description: "Support for backup jobs up to 100TB",
-            },
-            {
-                id: "FEAT-002",
-                title: "New REST API endpoints",
-                description: "Added 15 new API endpoints for better integration",
-            },
-        ],
-        fixes: [
-            {
-                id: "FIX-001",
-                title: "Memory leak in backup engine",
-                description: "Fixed memory leak affecting long-running backups",
-            },
-            {
-                id: "FIX-002",
-                title: "Improved error handling",
-                description: "Better error messages and recovery procedures",
-            },
-        ],
-        security: [
-            {
-                id: "SEC-001",
-                title: "CVE-2024-1234 patched",
-                description: "Critical security vulnerability resolved",
-            },
-        ],
-    },
-};
-const mockCategoryChanges = {
-    category: "features",
-    total_count: 24,
-    changes: [
-        {
-            id: "FEAT-001",
-            title: "Enhanced backup scalability",
-            version: "2024.12",
-        },
-        {
-            id: "FEAT-002",
-            title: "New REST API endpoints",
-            version: "2024.12",
-        },
-        {
-            id: "FEAT-003",
-            title: "AI-powered analytics",
-            version: "2024.12",
-        },
-        {
-            id: "FEAT-004",
-            title: "Improved disaster recovery",
-            version: "2024.09",
-        },
-    ],
-};
-const mockSummary = {
-    version: "2024.12",
-    title: "Commvault 2024.12 Release",
-    summary: "The 2024.12 release brings significant improvements to backup scalability, disaster recovery, and security.",
-    highlights: [
-        "Support for backups up to 100TB",
-        "15 new REST API endpoints",
-        "AI-powered analytics dashboard",
-        "12 critical security patches",
-    ],
-    statistics: {
-        total_changes: 200,
-        new_features: 24,
-        bug_fixes: 156,
-        security_patches: 12,
-        performance_improvements: 8,
-    },
-    release_date: "2024-12-15",
-    documentation_url: "https://docs.commvault.com/2024.12",
+// Request handler
+const requestHandler = async (request) => {
+    const { name, arguments: args } = request.params;
+    try {
+        let result;
+        switch (name) {
+            case "compare_releases":
+                result = handleCompareReleases(args.version1, args.version2);
+                break;
+            case "get_release_changes":
+                result = handleGetReleaseChanges(args.version, args.category);
+                break;
+            case "get_category_changes":
+                result = handleGetCategoryChanges(args.category, args.start_version, args.end_version);
+                break;
+            case "generate_summary":
+                result = handleGenerateSummary(args.version, args.format, args.include_metrics);
+                break;
+            default:
+                throw new Error(`Unknown tool: ${name}`);
+        }
+        return {
+            content: [
+                {
+                    type: "text",
+                    text: JSON.stringify(result, null, 2),
+                },
+            ],
+        };
+    }
+    catch (error) {
+        return {
+            content: [
+                {
+                    type: "text",
+                    text: `Error: ${error instanceof Error ? error.message : String(error)}`,
+                },
+            ],
+            isError: true,
+        };
+    }
 };
 // Tool handlers
-async function handleCompareReleases(version1, version2) {
+function handleCompareReleases(version1, version2) {
+    const rel1 = releases[version1];
+    const rel2 = releases[version2];
+    if (!rel1 || !rel2) {
+        throw new Error(`Invalid version. Available: ${allVersions.join(", ")}`);
+    }
+    const categoryComparison = {};
+    for (const category of allCategories) {
+        const v1Changes = rel1.categories[category] || [];
+        const v2Changes = rel2.categories[category] || [];
+        const v2Ids = new Set(v2Changes.map((c) => c.id));
+        const v1Ids = new Set(v1Changes.map((c) => c.id));
+        categoryComparison[category] = {
+            version1_count: v1Changes.length,
+            version2_count: v2Changes.length,
+            new_in_v2: v2Changes
+                .filter((c) => !v1Ids.has(c.id))
+                .map((c) => c.title),
+        };
+    }
     return {
-        ...mockCompareData,
         version1,
         version2,
+        release_date_v1: rel1.releaseDate,
+        release_date_v2: rel2.releaseDate,
+        category_comparison: categoryComparison,
     };
 }
-async function handleGetReleaseChanges(version, category) {
-    const result = {
-        ...mockReleaseChanges,
-        version,
-    };
-    if (category && category in mockReleaseChanges.changes) {
+function handleGetReleaseChanges(version, category) {
+    const release = releases[version];
+    if (!release) {
+        throw new Error(`Invalid version. Available: ${allVersions.join(", ")}`);
+    }
+    if (category) {
+        if (!allCategories.includes(category)) {
+            throw new Error(`Invalid category. Available: ${allCategories.join(", ")}`);
+        }
+        const changes = release.categories[category] || [];
         return {
             version,
-            release_date: mockReleaseChanges.release_date,
-            changes: {
-                [category]: mockReleaseChanges.changes[category],
-            },
+            release_date: release.releaseDate,
+            category,
+            changes,
+            total: changes.length,
         };
     }
-    return result;
-}
-async function handleGetCategoryChanges(category, _startVersion, _endVersion) {
     return {
-        ...mockCategoryChanges,
-        category,
+        version,
+        release_date: release.releaseDate,
+        categories: Object.entries(release.categories).reduce((acc, [cat, changes]) => {
+            acc[cat] = {
+                changes,
+                total: changes.length,
+            };
+            return acc;
+        }, {}),
     };
 }
-async function handleGenerateSummary(version, format = "markdown", includeMetrics = true) {
-    const baseResult = {
-        ...mockSummary,
-        version,
-        format,
-        include_metrics: includeMetrics,
+function handleGetCategoryChanges(category, startVersion, endVersion) {
+    if (!allCategories.includes(category)) {
+        throw new Error(`Invalid category. Available: ${allCategories.join(", ")}`);
+    }
+    const changesByVersion = {};
+    let totalChanges = 0;
+    for (const version of allVersions) {
+        const release = releases[version];
+        const changes = release.categories[category] || [];
+        if (changes.length > 0) {
+            changesByVersion[version] = changes;
+            totalChanges += changes.length;
+        }
+    }
+    return {
+        category,
+        total_changes: totalChanges,
+        changes_by_version: changesByVersion,
+        versions_filtered: startVersion || endVersion ? true : false,
     };
-    if (format === "markdown") {
-        return {
-            ...baseResult,
-            content: `# Commvault ${version} Release
-
-## Overview
-The ${version} release brings significant improvements to backup scalability, disaster recovery, and security.
-
-## Key Highlights
-- Support for backups up to 100TB
-- 15 new REST API endpoints
-- AI-powered analytics dashboard
-- 12 critical security patches
-
-## Statistics
-- Total Changes: 200
-- New Features: 24
-- Bug Fixes: 156
-- Security Patches: 12`,
+}
+function handleGenerateSummary(version, format = "markdown", includeMetrics = true) {
+    const release = releases[version];
+    if (!release) {
+        throw new Error(`Invalid version. Available: ${allVersions.join(", ")}`);
+    }
+    const metrics = {
+        virtualization: release.categories.Virtualization?.length || 0,
+        security: release.categories.Security?.length || 0,
+        database: release.categories.Database?.length || 0,
+        storage: release.categories.Storage?.length || 0,
+    };
+    const total = Object.values(metrics).reduce((a, b) => a + b, 0);
+    const baseResult = {
+        version,
+        release_date: release.releaseDate,
+        format,
+    };
+    if (includeMetrics) {
+        baseResult.metrics = {
+            ...metrics,
+            total,
         };
+    }
+    if (format === "markdown") {
+        const categoryDetails = allCategories
+            .map((cat) => {
+            const changes = release.categories[cat] || [];
+            if (changes.length === 0)
+                return "";
+            const items = changes.map((c) => `- **${c.title}**: ${c.description}`);
+            return `### ${cat}\n${items.join("\n")}`;
+        })
+            .filter(Boolean)
+            .join("\n\n");
+        const content = `# Commvault ${version} Release
+
+**Release Date**: ${release.releaseDate}
+
+## Summary
+Release ${version} includes ${total} major enhancements across virtualization, security, database, and storage categories.
+
+## Changes by Category
+
+${categoryDetails}
+
+${includeMetrics
+            ? `## Statistics
+- Virtualization: ${metrics.virtualization} enhancements
+- Security: ${metrics.security} enhancements
+- Database: ${metrics.database} enhancements
+- Storage: ${metrics.storage} enhancements
+- **Total**: ${total} enhancements`
+            : ""}`;
+        return { ...baseResult, content };
     }
     if (format === "html") {
-        return {
-            ...baseResult,
-            content: `<h1>Commvault ${version} Release</h1><p>The ${version} release brings significant improvements...</p>`,
-        };
+        const categoryDetails = allCategories
+            .map((cat) => {
+            const changes = release.categories[cat] || [];
+            if (changes.length === 0)
+                return "";
+            const items = changes
+                .map((c) => `<li><strong>${c.title}</strong>: ${c.description}</li>`)
+                .join("");
+            return `<h3>${cat}</h3><ul>${items}</ul>`;
+        })
+            .filter(Boolean)
+            .join("");
+        const content = `<h1>Commvault ${version} Release</h1><p><strong>Release Date:</strong> ${release.releaseDate}</p><p>Release ${version} includes ${total} major enhancements across virtualization, security, database, and storage categories.</p><h2>Changes by Category</h2>${categoryDetails}`;
+        return { ...baseResult, content };
     }
     return baseResult;
 }
-// Register handlers with SDK schemas
-server.setRequestHandler(ListToolsRequestSchema, requestHandlers["tools/list"]);
-server.setRequestHandler(CallToolRequestSchema, requestHandlers["tools/call"]);
-// Start the server
+// Register handlers
+server.setRequestHandler(ListToolsRequestSchema, async () => ({
+    tools,
+}));
+server.setRequestHandler(CallToolRequestSchema, requestHandler);
+// Start server
 async function main() {
     const transport = new StdioServerTransport();
     await server.connect(transport);
