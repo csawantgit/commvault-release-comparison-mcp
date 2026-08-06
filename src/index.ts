@@ -5,7 +5,7 @@ import {
   ListToolsRequestSchema,
   CallToolRequestSchema,
 } from "@modelcontextprotocol/sdk/types.js";
-import { releases, allVersions, allCategories } from "./data/releases.js";
+import { ReleaseManager } from "./data/releaseManager.js";
 
 const server = new Server({
   name: "commvault-release-comparison",
@@ -16,91 +16,100 @@ server.registerCapabilities({
   tools: {},
 });
 
-// Tool definitions
-const tools: Tool[] = [
-  {
-    name: "compare_releases",
-    description:
-      "Compare two Commvault release versions and show differences category-wise",
-    inputSchema: {
-      type: "object",
-      properties: {
-        version1: {
-          type: "string",
-          description: `First version to compare. Available: ${allVersions.join(", ")}`,
+const releaseManager = ReleaseManager.getInstance();
+
+// Tool definitions will be generated dynamically after loading releases
+let tools: Tool[] = [];
+
+function generateToolDefinitions(
+  availableVersions: string[],
+  availableCategories: string[]
+): Tool[] {
+  return [
+    {
+      name: "compare_releases",
+      description:
+        "Compare two Commvault release versions and show differences category-wise",
+      inputSchema: {
+        type: "object",
+        properties: {
+          version1: {
+            type: "string",
+            description: `First version to compare. Available: ${availableVersions.join(", ")}`,
+          },
+          version2: {
+            type: "string",
+            description: `Second version to compare. Available: ${availableVersions.join(", ")}`,
+          },
         },
-        version2: {
-          type: "string",
-          description: `Second version to compare. Available: ${allVersions.join(", ")}`,
-        },
+        required: ["version1", "version2"],
       },
-      required: ["version1", "version2"],
     },
-  },
-  {
-    name: "get_release_changes",
-    description: "Get all changes for a selected release",
-    inputSchema: {
-      type: "object",
-      properties: {
-        version: {
-          type: "string",
-          description: `Release version. Available: ${allVersions.join(", ")}`,
+    {
+      name: "get_release_changes",
+      description: "Get all changes for a selected release",
+      inputSchema: {
+        type: "object",
+        properties: {
+          version: {
+            type: "string",
+            description: `Release version. Available: ${availableVersions.join(", ")}`,
+          },
+          category: {
+            type: "string",
+            description: `Optional filter by category. Available: ${availableCategories.join(", ")}`,
+          },
         },
-        category: {
-          type: "string",
-          description: `Optional filter by category. Available: ${allCategories.join(", ")}`,
-        },
+        required: ["version"],
       },
-      required: ["version"],
     },
-  },
-  {
-    name: "get_category_changes",
-    description: "Get changes for a selected category across releases",
-    inputSchema: {
-      type: "object",
-      properties: {
-        category: {
-          type: "string",
-          description: `Category to retrieve. Available: ${allCategories.join(", ")}`,
+    {
+      name: "get_category_changes",
+      description: "Get changes for a selected category across releases",
+      inputSchema: {
+        type: "object",
+        properties: {
+          category: {
+            type: "string",
+            description: `Category to retrieve. Available: ${availableCategories.join(", ")}`,
+          },
+          start_version: {
+            type: "string",
+            description: `Optional start version for filtering. Available: ${availableVersions.join(", ")}`,
+          },
+          end_version: {
+            type: "string",
+            description: `Optional end version for filtering. Available: ${availableVersions.join(", ")}`,
+          },
         },
-        start_version: {
-          type: "string",
-          description: `Optional start version for filtering. Available: ${allVersions.join(", ")}`,
-        },
-        end_version: {
-          type: "string",
-          description: `Optional end version for filtering. Available: ${allVersions.join(", ")}`,
-        },
+        required: ["category"],
       },
-      required: ["category"],
     },
-  },
-  {
-    name: "generate_summary",
-    description: "Generate a human-readable summary for a release",
-    inputSchema: {
-      type: "object",
-      properties: {
-        version: {
-          type: "string",
-          description: `Release version. Available: ${allVersions.join(", ")}`,
+    {
+      name: "generate_summary",
+      description: "Generate a human-readable summary for a release",
+      inputSchema: {
+        type: "object",
+        properties: {
+          version: {
+            type: "string",
+            description: `Release version. Available: ${availableVersions.join(", ")}`,
+          },
+          format: {
+            type: "string",
+            enum: ["markdown", "html", "plaintext"],
+            description: "Output format for the summary",
+          },
+          include_metrics: {
+            type: "boolean",
+            description: "Include change counts and statistics",
+          },
         },
-        format: {
-          type: "string",
-          enum: ["markdown", "html", "plaintext"],
-          description: "Output format for the summary",
-        },
-        include_metrics: {
-          type: "boolean",
-          description: "Include change counts and statistics",
-        },
+        required: ["version"],
       },
-      required: ["version"],
     },
-  },
-];
+  ];
+}
 
 // Request handler
 const requestHandler = async (request: any) => {
@@ -111,20 +120,20 @@ const requestHandler = async (request: any) => {
 
     switch (name) {
       case "compare_releases":
-        result = handleCompareReleases(args.version1, args.version2);
+        result = await handleCompareReleases(args.version1, args.version2);
         break;
       case "get_release_changes":
-        result = handleGetReleaseChanges(args.version, args.category);
+        result = await handleGetReleaseChanges(args.version, args.category);
         break;
       case "get_category_changes":
-        result = handleGetCategoryChanges(
+        result = await handleGetCategoryChanges(
           args.category,
           args.start_version,
           args.end_version
         );
         break;
       case "generate_summary":
-        result = handleGenerateSummary(
+        result = await handleGenerateSummary(
           args.version,
           args.format,
           args.include_metrics
@@ -156,20 +165,25 @@ const requestHandler = async (request: any) => {
 };
 
 // Tool handlers
-function handleCompareReleases(version1: string, version2: string): object {
-  const rel1 = releases[version1];
-  const rel2 = releases[version2];
+async function handleCompareReleases(
+  version1: string,
+  version2: string
+): Promise<object> {
+  const rel1 = await releaseManager.getRelease(version1);
+  const rel2 = await releaseManager.getRelease(version2);
 
   if (!rel1 || !rel2) {
-    throw new Error(`Invalid version. Available: ${allVersions.join(", ")}`);
+    const available = releaseManager.getAvailableVersions();
+    throw new Error(`Invalid version. Available: ${available.join(", ")}`);
   }
 
+  const categories = releaseManager.getAvailableCategories();
   const categoryComparison: Record<
     string,
     { version1_count: number; version2_count: number; new_in_v2: string[] }
   > = {};
 
-  for (const category of allCategories) {
+  for (const category of categories) {
     const v1Changes = rel1.categories[category] || [];
     const v2Changes = rel2.categories[category] || [];
     const v2Ids = new Set(v2Changes.map((c) => c.id));
@@ -193,20 +207,22 @@ function handleCompareReleases(version1: string, version2: string): object {
   };
 }
 
-function handleGetReleaseChanges(
+async function handleGetReleaseChanges(
   version: string,
   category?: string
-): object {
-  const release = releases[version];
+): Promise<object> {
+  const release = await releaseManager.getRelease(version);
 
   if (!release) {
-    throw new Error(`Invalid version. Available: ${allVersions.join(", ")}`);
+    const available = releaseManager.getAvailableVersions();
+    throw new Error(`Invalid version. Available: ${available.join(", ")}`);
   }
 
   if (category) {
-    if (!allCategories.includes(category)) {
+    const availableCategories = releaseManager.getAvailableCategories();
+    if (!availableCategories.includes(category)) {
       throw new Error(
-        `Invalid category. Available: ${allCategories.join(", ")}`
+        `Invalid category. Available: ${availableCategories.join(", ")}`
       );
     }
     const changes = release.categories[category] || [];
@@ -235,19 +251,23 @@ function handleGetReleaseChanges(
   };
 }
 
-function handleGetCategoryChanges(
+async function handleGetCategoryChanges(
   category: string,
   startVersion?: string,
   endVersion?: string
-): object {
-  if (!allCategories.includes(category)) {
-    throw new Error(`Invalid category. Available: ${allCategories.join(", ")}`);
+): Promise<object> {
+  const availableCategories = releaseManager.getAvailableCategories();
+  if (!availableCategories.includes(category)) {
+    throw new Error(
+      `Invalid category. Available: ${availableCategories.join(", ")}`
+    );
   }
 
   const changesByVersion: Record<string, any[]> = {};
   let totalChanges = 0;
 
-  for (const version of allVersions) {
+  const releases = releaseManager.getReleases();
+  for (const version of Object.keys(releases)) {
     const release = releases[version];
     const changes = release.categories[category] || [];
 
@@ -265,23 +285,25 @@ function handleGetCategoryChanges(
   };
 }
 
-function handleGenerateSummary(
+async function handleGenerateSummary(
   version: string,
   format: string = "markdown",
   includeMetrics: boolean = true
-): object {
-  const release = releases[version];
+): Promise<object> {
+  const release = await releaseManager.getRelease(version);
 
   if (!release) {
-    throw new Error(`Invalid version. Available: ${allVersions.join(", ")}`);
+    const available = releaseManager.getAvailableVersions();
+    throw new Error(`Invalid version. Available: ${available.join(", ")}`);
   }
 
-  const metrics = {
-    virtualization: release.categories.Virtualization?.length || 0,
-    security: release.categories.Security?.length || 0,
-    database: release.categories.Database?.length || 0,
-    storage: release.categories.Storage?.length || 0,
-  };
+  const availableCategories = releaseManager.getAvailableCategories();
+
+  const metrics: Record<string, number> = {};
+  for (const cat of availableCategories) {
+    metrics[cat.toLowerCase().replace(/\s+/g, "_")] =
+      release.categories[cat]?.length || 0;
+  }
 
   const total = Object.values(metrics).reduce((a, b) => a + b, 0);
 
@@ -299,7 +321,7 @@ function handleGenerateSummary(
   }
 
   if (format === "markdown") {
-    const categoryDetails = allCategories
+    const categoryDetails = availableCategories
       .map((cat) => {
         const changes = release.categories[cat] || [];
         if (changes.length === 0) return "";
@@ -309,33 +331,28 @@ function handleGenerateSummary(
       .filter(Boolean)
       .join("\n\n");
 
+    const metricsSection = includeMetrics
+      ? `## Statistics\n${availableCategories.map((cat) => `- ${cat}: ${release.categories[cat]?.length || 0} enhancements`).join("\n")}\n- **Total**: ${total} enhancements`
+      : "";
+
     const content = `# Commvault ${version} Release
 
 **Release Date**: ${release.releaseDate}
 
 ## Summary
-Release ${version} includes ${total} major enhancements across virtualization, security, database, and storage categories.
+Release ${version} includes ${total} major enhancements across ${availableCategories.join(", ").toLowerCase()} categories.
 
 ## Changes by Category
 
 ${categoryDetails}
 
-${
-  includeMetrics
-    ? `## Statistics
-- Virtualization: ${metrics.virtualization} enhancements
-- Security: ${metrics.security} enhancements
-- Database: ${metrics.database} enhancements
-- Storage: ${metrics.storage} enhancements
-- **Total**: ${total} enhancements`
-    : ""
-}`;
+${metricsSection}`;
 
     return { ...baseResult, content };
   }
 
   if (format === "html") {
-    const categoryDetails = allCategories
+    const categoryDetails = availableCategories
       .map((cat) => {
         const changes = release.categories[cat] || [];
         if (changes.length === 0) return "";
@@ -347,7 +364,7 @@ ${
       .filter(Boolean)
       .join("");
 
-    const content = `<h1>Commvault ${version} Release</h1><p><strong>Release Date:</strong> ${release.releaseDate}</p><p>Release ${version} includes ${total} major enhancements across virtualization, security, database, and storage categories.</p><h2>Changes by Category</h2>${categoryDetails}`;
+    const content = `<h1>Commvault ${version} Release</h1><p><strong>Release Date:</strong> ${release.releaseDate}</p><p>Release ${version} includes ${total} major enhancements.</p><h2>Changes by Category</h2>${categoryDetails}`;
 
     return { ...baseResult, content };
   }
@@ -356,17 +373,42 @@ ${
 }
 
 // Register handlers
-server.setRequestHandler(ListToolsRequestSchema, async () => ({
-  tools,
-}));
+server.setRequestHandler(ListToolsRequestSchema, async () => {
+  return { tools };
+});
 
 server.setRequestHandler(CallToolRequestSchema, requestHandler);
 
 // Start server
 async function main() {
-  const transport = new StdioServerTransport();
-  await server.connect(transport);
-  console.error("Commvault Release Comparison MCP Server started");
+  try {
+    // Initialize release manager with default versions
+    console.error("[Startup] Loading release data...");
+    await releaseManager.initialize(["11.44", "11.46"]);
+
+    // Generate tool definitions with loaded data
+    const availableVersions = releaseManager.getAvailableVersions();
+    const availableCategories = releaseManager.getAvailableCategories();
+
+    tools = generateToolDefinitions(availableVersions, availableCategories);
+
+    console.error(
+      `[Startup] Loaded ${availableVersions.length} versions: ${availableVersions.join(", ")}`
+    );
+    console.error(
+      `[Startup] Available categories: ${availableCategories.join(", ")}`
+    );
+
+    const transport = new StdioServerTransport();
+    await server.connect(transport);
+    console.error("Commvault Release Comparison MCP Server started");
+  } catch (error) {
+    console.error(
+      "Startup error:",
+      error instanceof Error ? error.message : String(error)
+    );
+    process.exit(1);
+  }
 }
 
 main().catch((error) => {
